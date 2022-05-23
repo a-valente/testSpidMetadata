@@ -1,16 +1,11 @@
 <?xml version="1.0"?>
-<!-- Esempio di metadata Service Provider
-     Per informazioni sulla compilazione fare riferimento alle Regole Tecniche SPID -->
 
-<!-- entityID è una URI che individua univocamente il Service Provider -->
 <md:EntityDescriptor
     xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
     xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
     entityID="https://testspidauth.auth.us-east-1.amazoncognito.com/"
     ID="_681a637-6cd4-434f-92c3-4fed720b2ad8">
 
-    <!-- Il certificato del Service Provider va riportato nei due tag KeyDescriptor
-         qui sotto, senza i delimitatori ‐‐‐ BEGIN CERTIFICATE ‐‐‐ e ‐‐‐ END CERTIFICATE ‐‐‐ -->
     <md:SPSSODescriptor
         protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol"
         AuthnRequestsSigned="true"
@@ -41,17 +36,12 @@ jbha2svcrOdPVJ8lS0GV3ojhnPWKU35wHgbobM5oTtmwxKNgmcZK32c=</ds:X509Certificate>
         </md:KeyDescriptor>
         <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
 
-        <!-- Endpoint del Service Provider deputato a ricevere le asserzioni di login.
-             (può essere ripetuto più volte, incrementando l'attributo index) -->
         <md:AssertionConsumerService
             Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
             Location="https://testspidauth.auth.us-east-1.amazoncognito.com/spid/acs"
             index="0"
             isDefault="true" />
 
-        <!-- Gruppo di attributi predefinito, che il Service Provider potrà richiedere
-             durante in login. Si può specificare più volte. Si raccomanda di limitare
-             gli attributi richiesti ai soli necessari per l'erogazione del proprio servizio. -->
         <md:AttributeConsumingService index="1">
             <md:ServiceName xml:lang="it">TestSpid</md:ServiceName>
             <md:ServiceDescription xml:lang="it">TestSpid</md:ServiceDescription>
@@ -76,7 +66,6 @@ jbha2svcrOdPVJ8lS0GV3ojhnPWKU35wHgbobM5oTtmwxKNgmcZK32c=</ds:X509Certificate>
 
     </md:SPSSODescriptor>
 
-    <!-- Informazioni generali sul Service Provider -->
     <md:Organization>
         <md:OrganizationName xml:lang="it">Spid</md:OrganizationName>
         <md:OrganizationDisplayName xml:lang="it">Spid</md:OrganizationDisplayName>
