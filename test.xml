@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!-- Esempio di metadata Service Provider
+     Per informazioni sulla compilazione fare riferimento alle Regole Tecniche SPID -->
+
+<!-- entityID è una URI che individua univocamente il Service Provider -->
+<md:EntityDescriptor
+    xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+    xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+    entityID="https://testspidauth.auth.us-east-1.amazoncognito.com/"
+    ID="_681a637-6cd4-434f-92c3-4fed720b2ad8">
+
+    <!-- Il certificato del Service Provider va riportato nei due tag KeyDescriptor
+         qui sotto, senza i delimitatori ‐‐‐ BEGIN CERTIFICATE ‐‐‐ e ‐‐‐ END CERTIFICATE ‐‐‐ -->
+    <md:SPSSODescriptor
+        protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol"
+        AuthnRequestsSigned="true"
+        WantAssertionsSigned="true">
+
+        <md:KeyDescriptor use="signing">
+            <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                <ds:X509Data>
+<ds:X509Certificate>MIIDJTCCAg0CFH516ES4X1mgsEN8hjLKWJd1om7tMA0GCSqGSIb3DQEBCwUAME8x
+CzAJBgNVBAYTAklUMQ4wDAYDVQQIDAVJdGFseTENMAsGA1UEBwwEUm9tZTEhMB8G
+A1UECgwYSW50ZXJuZXQgV2lkZ2l0cyBQdHkgTHRkMB4XDTIyMDUyMzExMTQ1MVoX
+DTIzMDUyMzExMTQ1MVowTzELMAkGA1UEBhMCSVQxDjAMBgNVBAgMBUl0YWx5MQ0w
+CwYDVQQHDARSb21lMSEwHwYDVQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQw
+ggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDOC68mqw7yE6CWrVlYnWe9
+YIjDp/7Z7ItWgQB4LoVCraxZTTpJ9mvQY0UPJruRPGDugtralt7om4BD9e8rn3ub
+i0Jbfsp5Rz4ifZauzyBCcRhRs5MLjtfgzl9Qrlvq1jPDtZZjWxVTQxWrRmTg5Ssf
+ubwSSKZhP+QQjafoKcfYQ6lK8LK7jdnpg2WzOLLY2rYQeQZ2ae/iZ9jC5BAVjwUl
+UeLK18F+U8cO8gNAAbkeZsdKnbOH9L5zwxFZFhOT41dn/Qx3y77VC4bUjefZ23Px
+D9OVi94YQlpAiWvOhh10j6GNQdVjS1vH1rg5zaW4VvOvbFs+Yy5aOJzaK57ONnV5
+AgMBAAEwDQYJKoZIhvcNAQELBQADggEBAGoLM0f0GcLqFipLYwSrjKHX+rvBAose
+LcdZfCKJrnD62X43PJsvABrjhxbNtctdC5CJJSq2IPc/LXKSJfJxzsn3saBK12gj
+/iICzKhulhC8EuYyhBl1MMvJjk8Kos/8dBLpfG0IwXhEuTI9bSrZ8RosE/YKPeXW
+JfIF0J0wve40PA6yU5UMai3eOK5w7GrrhfkTZous+BSrfdiXO6hLLdfuT5Guyt7U
++ByStdNkM0SMxbJw7L/82TfirXg5Tq0CSALJ5I4OMKgGl2PwqVkGzZnck8qShzKX
+jbha2svcrOdPVJ8lS0GV3ojhnPWKU35wHgbobM5oTtmwxKNgmcZK32c=</ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </md:KeyDescriptor>
+        <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
+
+        <!-- Endpoint del Service Provider deputato a ricevere le asserzioni di login.
+             (può essere ripetuto più volte, incrementando l'attributo index) -->
+        <md:AssertionConsumerService
+            Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+            Location="https://testspidauth.auth.us-east-1.amazoncognito.com/spid/acs"
+            index="0"
+            isDefault="true" />
+
+        <!-- Gruppo di attributi predefinito, che il Service Provider potrà richiedere
+             durante in login. Si può specificare più volte. Si raccomanda di limitare
+             gli attributi richiesti ai soli necessari per l'erogazione del proprio servizio. -->
+        <md:AttributeConsumingService index="1">
+            <md:ServiceName xml:lang="it">TestSpid</md:ServiceName>
+            <md:ServiceDescription xml:lang="it">TestSpid</md:ServiceDescription>
+            <md:RequestedAttribute Name="name" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+            <md:RequestedAttribute Name="fiscalNumber" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+            <md:RequestedAttribute Name="familyName" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+            <md:RequestedAttribute Name="spidCode" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+            <md:RequestedAttribute Name="gender" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+            <md:RequestedAttribute Name="dateOfBirth" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+            <md:RequestedAttribute Name="countyOfBirth" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+            <md:RequestedAttribute Name="idCard" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+            <md:RequestedAttribute Name="registeredOffice" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+            <md:RequestedAttribute Name="email" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+            <md:RequestedAttribute Name="digitalAddress" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+            <md:RequestedAttribute Name="ivaCode" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+            <md:RequestedAttribute Name="placeOfBirth" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+            <md:RequestedAttribute Name="companyName" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+            <md:RequestedAttribute Name="mobilePhone" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+            <md:RequestedAttribute Name="address" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+            <md:RequestedAttribute Name="expirationDate" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+        </md:AttributeConsumingService>
+
+    </md:SPSSODescriptor>
+
+    <!-- Informazioni generali sul Service Provider -->
+    <md:Organization>
+        <md:OrganizationName xml:lang="it">Spid</md:OrganizationName>
+        <md:OrganizationDisplayName xml:lang="it">Spid</md:OrganizationDisplayName>
+        <md:OrganizationURL xml:lang="it">https://testspidauth.auth.us-east-1.amazoncognito.com/</md:OrganizationURL>
+    </md:Organization>
+
+</md:EntityDescriptor>
